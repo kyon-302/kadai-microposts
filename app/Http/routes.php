@@ -22,5 +22,11 @@ Route::get('logout', 'Auth\AuthController@getLogout')->name('logout.get');
 
 route::group(['middleware'=>'auth'],function(){
         route::resource('users','UsersController',['only'=>['index','show']]);
+        Route::group(['prefix' => 'users/{id}'], function () { 
+                Route::post('follow', 'UserFollowController@store')->name('user.follow');
+                Route::delete('unfollow', 'UserFollowController@destroy')->name('user.unfollow');
+                Route::get('followings', 'UsersController@followings')->name('users.followings');
+                Route::get('followers', 'UsersController@followers')->name('users.followers');
+            });
         Route::resource('microposts', 'MicropostsController', ['only' => ['store', 'destroy']]);
 });
