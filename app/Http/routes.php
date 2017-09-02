@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController@index');
 
 Route::get('signup','Auth\AuthController@getRegister')->name('signup.get');
 Route::post('signup','Auth\AuthController@postRegister')->name('signup.post');
@@ -24,4 +22,5 @@ Route::get('logout', 'Auth\AuthController@getLogout')->name('logout.get');
 
 route::group(['middleware'=>'auth'],function(){
         route::resource('users','UsersController',['only'=>['index','show']]);
+        Route::resource('microposts', 'MicropostsController', ['only' => ['store', 'destroy']]);
 });
