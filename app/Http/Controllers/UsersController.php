@@ -130,4 +130,17 @@ class UsersController extends Controller
         
         return view('users.followers', $data);
     }
+    
+    public function likes()
+    {
+        $user = \Auth::user();
+        $likes = $user->likes()->paginate(10);
+        
+        $data = [
+            'user' => $user,
+            'likes' => $likes,
+        ];
+        
+        return view('users.likes', $data);
+    }
 }

@@ -20,6 +20,9 @@
                 @endif
             </div>
         </div>
+        <div class="media-right">
+            @include('user_like.like_button', ['micropost' => $micropost])
+        </div>
     </li>
 @endforeach
 </ul>
